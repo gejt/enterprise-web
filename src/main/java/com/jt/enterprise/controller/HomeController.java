@@ -126,4 +126,8 @@ public class HomeController {
 		responseOutputStream.flush();
 		responseOutputStream.close();
 	}
+	@RequestMapping("/welcome")
+	public String welcome(){
+		return "welcome";
+	}
 }
