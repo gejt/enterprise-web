@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jt.enterprise.mapper.UserMapper" >
+    <resultMap id="BaseResultMap" type="Users" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="user_sex" property="userSex" javaType="com.jt.common.enums.UserSexEnum"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, user_name, password, user_sex, nick_name
+    </sql>
+    
+    <sql id="Base_query" >
+        where 1=1 
+        <if test="query.userName!=null and query.userName!=''">and user_name=#{query.userName}</if>
+        <if test="query.userNameLike!=null  and query.userNameLike!=''">and user_name like concat('%',#{query.userNameLike},'%')</if>
+        <if test="query.nickNameLike!=null  and query.nickNameLike!=''" >and nick_name like concat('%',#{query.nickNameLike},'%')</if>
+    </sql>
+    
+    <sql id="Base_pager" >
+        limit #{query.offset},#{query.pageSize}
+    </sql>
+   <sql id="Base_order_by" >
+        <if test="query.orderBy!=null and query.orderBy!=''">
+        	order by ${query.orderBy} ${query.direction}
+        </if>
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+       FROM users
+    </select>
+
+    <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        SELECT 
+       <include refid="Base_Column_List" />
+       FROM users
+       WHERE id = #{id}
+    </select>
+    <select id="getByUserName" resultMap="BaseResultMap" >
+        SELECT 
+       <include refid="Base_Column_List" />
+       FROM users
+       WHERE user_name = #{userName}
+    </select>
+    
+    <select id="queryList" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+       FROM users
+       <include refid="Base_query" />
+       <include refid="Base_order_by" />
+       <include refid="Base_pager" />
+    </select>
+    
+    <select id="queryCount" resultType="java.lang.Integer"  >
+       SELECT 
+       count(1)
+       FROM users
+       <include refid="Base_query" />
+    </select>
+
+    <insert id="insert" parameterType="Users" >
+       INSERT INTO 
+            users
+            (user_name,password,user_sex) 
+        VALUES
+            (#{userName}, #{password}, #{userSex})
+    </insert>
+
+    <update id="update" parameterType="Users" >
+       UPDATE 
+            users 
+       SET 
+        <if test="userName != null">user_name = #{userName},</if>
+        <if test="password != null">password = #{password},</if>
+        nick_name = #{nickName}
+       WHERE 
+            id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Long" >
+       DELETE FROM
+             users 
+       WHERE 
+             id =#{id}
+    </delete>
+</mapper>
