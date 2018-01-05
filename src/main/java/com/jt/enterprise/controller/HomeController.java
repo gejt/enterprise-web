@@ -20,29 +20,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.jt.enterprise.domain.Users;
+import com.jt.enterprise.service.UserService;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
+	@Resource
+	UserService userService;
 	@RequestMapping
 	public String index() {
-		return "index";
+		return "redirect:/index";
 	}
 	
-	@RequestMapping("index")
+	@RequestMapping("/index")
 	public String indexPage() {
-		return "index";
+		return "/index";
 	}
 
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public String loginPage(Map<String, Object> map) {
-		return "login";
+		map.put("msg", "null");
+		return "/login";
 	}
 
-	@RequestMapping("loginSubmit")
+	@RequestMapping("/loginSubmit")
 	public String login(HttpServletRequest request, String userName,
 			String password, Boolean rememberMe, String verifyCode, Model model) {
+		model.addAttribute("userName",userName);
 		try {
 
 			Subject currentUser = SecurityUtils.getSubject();
@@ -51,7 +57,7 @@ public class HomeController {
 
 				if (!isVerifyCodeChecked(request, verifyCode)) {
 					model.addAttribute("msg", "验证码错误");
-					return "login";
+					return "/login";
 				}
 
 				if (rememberMe == null) {
@@ -63,13 +69,15 @@ public class HomeController {
 				UsernamePasswordToken token = new UsernamePasswordToken(
 						userName, md5Pwd, rememberMe);
 				SecurityUtils.getSubject().login(token);
-				return "index";
+				Users user = userService.getByUserName(userName);
+				SecurityUtils.getSubject().getSession().setAttribute("LOGIN_USER", user);
+				return "redirect:/index";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "用户名或密码错误");
 		}
-		return "login";
+		return "/login";
 	}
 
 	private boolean isVerifyCodeChecked(HttpServletRequest request,

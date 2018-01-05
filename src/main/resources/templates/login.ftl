@@ -32,13 +32,13 @@
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="userName" type="text" placeholder="账户" class="input-text size-L" value="gejt1">
+          <input id="" name="userName" type="text" placeholder="账户" class="input-text size-L" value="${userName!}">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="password" type="password" placeholder="密码" class="input-text size-L" value="a123456">
+          <input id="" name="password" type="password" placeholder="密码" class="input-text size-L" value="">
         </div>
       </div>
       <div class="row cl">
@@ -50,9 +50,17 @@
         <div class="formControls col-xs-8 col-xs-offset-3">
           <label for="online">
             <input type="checkbox" name="rememberMe" id="online" value="true">
-            使我保持登录状态</label>
+            	使我保持登录状态
+            </label>
         </div>
       </div>
+      <#if msg!="null">
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <p style="color:red;"> ${msg!}</p>
+        </div>
+      </div>
+      </#if>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
