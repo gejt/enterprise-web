@@ -19,6 +19,7 @@ import com.jt.enterprise.service.UserService;
 @Controller
 @RequestMapping("user")
 public class UserController {
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	@Resource UserService userService;
 	@RequestMapping
