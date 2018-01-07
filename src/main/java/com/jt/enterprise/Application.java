@@ -23,5 +23,6 @@ public class Application
     private String name;
     private String keywords;
     private String description;
+    private String version;
 
 }
