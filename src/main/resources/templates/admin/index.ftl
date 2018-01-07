@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<base id="base" href="${request.contextPath}">
+<base id="base" href="../${request.contextPath}">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -55,10 +55,12 @@
 					<a href="#" class="dropDown_A">${LOGIN_USER.userName!}<i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-						<li><a href="./logout">退出</a></li>
+						<li><a href="./admin/logout">退出</a></li>
 				</ul>
 			</li>
+				<!--
 				<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+				-->
 				<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -203,7 +205,7 @@
 		<div class="Hui-tabNav-wp">
 			<ul id="min_title_list" class="acrossTab cl">
 				<li class="active">
-					<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+					<span title="我的桌面" data-href="./admin/welcome">我的桌面</span>
 					<em></em></li>
 		</ul>
 	</div>
@@ -212,7 +214,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="./welcome"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="./admin/welcome"></iframe>
 	</div>
 </div>
 </section>

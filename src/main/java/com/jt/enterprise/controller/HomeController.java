@@ -25,73 +25,7 @@ import com.jt.enterprise.service.UserService;
 
 @Controller
 @RequestMapping("/")
-public class HomeController {
-
-	@Resource
-	UserService userService;
-	@RequestMapping
-	public String index() {
-		return "redirect:/index";
-	}
-	
-	@RequestMapping("/index")
-	public String indexPage() {
-		return "/index";
-	}
-
-	@RequestMapping("/login")
-	public String loginPage(Map<String, Object> map) {
-		map.put("msg", "null");
-		return "/login";
-	}
-
-	@RequestMapping("/loginSubmit")
-	public String login(HttpServletRequest request, String userName,
-			String password, Boolean rememberMe, String verifyCode, Model model) {
-		model.addAttribute("userName",userName);
-		try {
-
-			Subject currentUser = SecurityUtils.getSubject();
-
-			if (!currentUser.isAuthenticated()) {
-
-				if (!isVerifyCodeChecked(request, verifyCode)) {
-					model.addAttribute("msg", "验证码错误");
-					return "/login";
-				}
-
-				if (rememberMe == null) {
-					rememberMe = false;
-				}
-
-				String md5Pwd = new Md5Hash(password, userName).toString().toUpperCase();
-
-				UsernamePasswordToken token = new UsernamePasswordToken(
-						userName, md5Pwd, rememberMe);
-				SecurityUtils.getSubject().login(token);
-				Users user = userService.getByUserName(userName);
-				SecurityUtils.getSubject().getSession().setAttribute("LOGIN_USER", user);
-				return "redirect:/index";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", "用户名或密码错误");
-		}
-		return "/login";
-	}
-
-	private boolean isVerifyCodeChecked(HttpServletRequest request,
-			String verifyCode) {
-		String captchaId = (String) request.getSession().getAttribute(
-				"vrifyCode");
-		return captchaId.equals(verifyCode);
-	}
-
-/*	@RequestMapping("logout")
-	public String logout(String userName, String password, Model model) {
-		SecurityUtils.getSubject().logout();
-		return "login";
-	}*/
+public class HomeController extends BaseController{
 
 	@Resource
 	DefaultKaptcha defaultKaptcha;
@@ -126,8 +60,5 @@ public class HomeController {
 		responseOutputStream.flush();
 		responseOutputStream.close();
 	}
-	@RequestMapping("/welcome")
-	public String welcome(){
-		return "welcome";
-	}
+
 }

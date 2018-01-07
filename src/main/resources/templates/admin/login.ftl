@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<base id="base" href="${request.contextPath}">
+<base id="base" href="../${request.contextPath}">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -28,7 +28,7 @@
 <div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="./loginSubmit" method="post">
+    <form class="form form-horizontal" action="./admin/loginSubmit" method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
