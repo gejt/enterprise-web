@@ -1,4 +1,4 @@
-package com.jt.enterprise.controller;
+package com.jt.enterprise.controller.admin;
 
 import java.util.Map;
 
