@@ -2,7 +2,6 @@ package com.jt.enterprise.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,22 +10,30 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.jt.enterprise.domain.Users;
-import com.jt.enterprise.service.UserService;
 
 @Controller
 @RequestMapping("/")
 public class HomeController extends BaseController{
 
+	@RequestMapping
+	public String index(Map<String, Object> map){
+		return "/index";
+	}
+	
+	@RequestMapping("/index")
+	public String indexPage(Map<String, Object> map){
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/text")
+	public String indexText(Map<String, Object> map){
+		return "/text";
+	}
+	
 	@Resource
 	DefaultKaptcha defaultKaptcha;
 
