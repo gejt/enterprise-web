@@ -50,10 +50,11 @@ public class AdminController  extends BaseController{
 
 			if (!currentUser.isAuthenticated()) {
 
-				if (!isVerifyCodeChecked(request, verifyCode)) {
+				/*
+				 if (!isVerifyCodeChecked(request, verifyCode)) {
 					model.addAttribute("msg", "验证码错误");
 					return "/admin/login";
-				}
+				}*/
 
 				if (rememberMe == null) {
 					rememberMe = false;

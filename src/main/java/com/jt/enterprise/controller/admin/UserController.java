@@ -17,15 +17,14 @@ import com.jt.enterprise.query.UserQuery;
 import com.jt.enterprise.service.UserService;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("admin/user")
 public class UserController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	@Resource UserService userService;
 	@RequestMapping
 	public String index(Map<String,Object> map){  
-	       map.put("name", "[Angel -- 守护天使]"); 
-		return "user/index";
+		return "admin/user/user-list";
 	}
 	
 	@RequestMapping("query")

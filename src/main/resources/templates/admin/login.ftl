@@ -1,94 +1,32 @@
-<!DOCTYPE HTML>
+<#assign base=request.contextPath />
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<base id="base" href="../${request.contextPath}">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="static/h-ui/lib/html5shiv.js"></script>
-<script type="text/javascript" src="static/h-ui/lib/respond.min.js"></script>
-<![endif]-->
-<link href="static/h-ui/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="static/h-ui/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
-<link href="static/h-ui/static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
-<link href="static/h-ui/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
-<!--[if IE 6]>
-<script type="text/javascript" src="static/h-ui/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
-<title>后台登录 - ${APP.name}</title>
-<meta name="keywords" content="${APP.name}">
-<meta name="description" content="${APP.name}">
-</head>
-<body>
-<input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header">${APP.name}&nbsp&nbsp后台管理系统</div>
-<div class="loginWraper">
-  <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="./admin/loginSubmit" method="post">
-      <div class="row cl">
-        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
-        <div class="formControls col-xs-8">
-          <input id="" name="userName" type="text" placeholder="账户" class="input-text size-L" value="${userName!}">
-        </div>
-      </div>
-      <div class="row cl">
-        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
-        <div class="formControls col-xs-8">
-          <input id="" name="password" type="password" placeholder="密码" class="input-text size-L" value="">
-        </div>
-      </div>
-      <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;" name="verifyCode">
-          <img src="defaultKaptcha" id="kanbuq" onclick="changeVerifyCode();"> <a  href="javascript:changeVerifyCode();">看不清，换一张</a> </div>
-      </div>
-      <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <label for="online">
-            <input type="checkbox" name="rememberMe" id="online" value="true">
-            	使我保持登录状态
-            </label>
-        </div>
-      </div>
-      <#if msg!="null">
-      <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <p style="color:red;"> ${msg!}</p>
-        </div>
-      </div>
-      </#if>
-      <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-<div class="footer">Copyright ${APP.name} @ 20180101</div>
-<script type="text/javascript" src="static/h-ui/lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="static/h-ui/static/h-ui/js/H-ui.min.js"></script>
-<!--此乃百度统计代码，请自行删除-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+  <head>
+    <link href="${base}/static/admin/css/signin.css" rel="stylesheet">
+    <#include "./common.ftl">
+    <title>请登录</title>
+  </head>
 
+  <body>
 
-//点击切换验证码
-	function changeVerifyCode() {
-		$("#kanbuq").attr("src","defaultKaptcha?" + Math.floor(Math.random() * 100));
-	}
-</script>
-<!--/此乃百度统计代码，请自行删除
-</body>
+    <div class="container">
+      <form class="form-signin" action="${base}/admin/loginSubmit" method="post">
+        <h2 class="form-signin-heading">请登录</h2>
+        <label for="inputEmail" class="sr-only">用户名</label>
+        <input type="text" id="userName" class="form-control" placeholder="用户名" name="userName" required autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密码" name="password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> 下次自动登录
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      </form>
+
+    </div> <!-- /container -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="${base}/static/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
